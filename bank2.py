@@ -71,6 +71,9 @@ Choose Menu
 6. TRANSFER
 7. LOGOUT
 ''')
+    accounts["noii"] = BankAccount("noii",10000000000000000,"2222")
+    accounts["Sathya"] = BankAccount("sathya",100,"12345")
+    accounts["Reak"] = BankAccount("Reak",1000,"123456")
 
     choice = input("Select Menu: ")
 
@@ -134,3 +137,4 @@ Choose Menu
     elif choice == "7":
         current_user = None
         print("logout success!!")
+

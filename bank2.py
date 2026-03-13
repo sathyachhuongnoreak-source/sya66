@@ -23,6 +23,16 @@ class BankAccount:
     def check_balance(self):
         print(f"Hello {self.name}. Your remaining balance is {self._balance}")
 
+    def transfer(self, receiver, amount):
+
+        if amount > self._balance:
+            print("You dont have enough balance to transfer") 
+            return
+        self.withdraw(amount)
+        receiver.deposit(amount)
+
+print("Transaction successfully.")
+
 
 class SavingAccount(BankAccount):
     def calculate_interest(self):
@@ -109,34 +119,18 @@ Choose Menu
             continue
         amount = float(input("Input amount to deposit: "))
         current_user.deposit(amount)
-
-    elif choice == "6":
+    elif choice =="6":
         if current_user is None:
-            print("Please login first")
+            print("please login first")
             continue
-        
-        target_name = input("Input the account name to transfer: ")
-        
-        if target_name in accounts:
-            if target_name == current_user.name:
-                print("You cannot transfer money to yourself!")
-                continue
-                
-            amount = float(input(f"Input amount to transfer to {target_name}: "))
-            
-            if amount > current_user._balance:
-                print("Balance is not enough for this transfer")
-            else:
-                current_user._balance -= amount
-                accounts[target_name]._balance += amount
-                print(f"Transfer successful! You sent ${amount} to {target_name}")
-                print(f"Your remaining balance is {current_user._balance}")
-        else:
-            print("Target account not found.")
 
+        receiver_name = input("Input receiver:  ")
+        if receiver_name not in accounts:
+            print("Receiver doesn't exist")
+            continue
+
+        amount = float(input(f"input ammount to transfer to {receiver_name}:  "))
+        current_user.transfer(accounts[receiver_name],amount)
     elif choice == "7":
         current_user = None
-        print("Logout success !!")
-
-    else:
-        print("Invalid menu")
+        print("logout success!!")
